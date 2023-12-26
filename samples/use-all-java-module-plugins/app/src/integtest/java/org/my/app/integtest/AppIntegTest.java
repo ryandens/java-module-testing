@@ -1,5 +1,6 @@
 package org.my.app.integtest;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.junit.jupiter.api.Test;
 import org.my.app.App;
 
@@ -17,7 +18,7 @@ public class AppIntegTest {
         assertTrue(App.doWork());
 
         try (InputStream is = AppIntegTest.class.getResourceAsStream("AppTestData.txt")) {
-            System.out.println(new BufferedReader(new InputStreamReader(is)).readLine());
+            System.out.println(BoundedLineReader.readLine(new BufferedReader(new InputStreamReader(is)), 5_000_000));
         }
     }
 
