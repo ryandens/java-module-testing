@@ -1,6 +1,7 @@
 package org.my.app;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.pixee.security.BoundedLineReader;
 import org.slf4j.spi.LoggerFactoryBinder;
 
 import java.io.BufferedReader;
@@ -26,7 +27,7 @@ public class App {
 
     protected static void printData() throws IOException {
         try (InputStream is = App.class.getResourceAsStream("AppData.txt")) {
-            System.out.println(new BufferedReader(new InputStreamReader(is)).readLine());
+            System.out.println(BoundedLineReader.readLine(new BufferedReader(new InputStreamReader(is)), 5_000_000));
         }
     }
 }
